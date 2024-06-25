@@ -13,6 +13,7 @@ session_start();
 // Connect to the database
 require 'helpers.php';
 require 'db.php';
+require 'credentials.php';
 
 class Register{
     protected $helpers;
@@ -93,7 +94,8 @@ class Register{
         }
     }
 }
-$register = new Register(new DB(new PDO("mysql:host=localhost;dbname=veronicadb;port=3306","sk123","Sk123&*("),"mysql:host=localhost;dbname=veronicadb;port=3306","sk123","Sk123&*("), new Helpers(),[],"");
+$credentials = new Credentials();
+$register = new Register(new DB(new PDO($credentials->getDSN(),$credentials->getUsername(),$credentials->getPassword()),$credentials->getDSN(),$credentials->getUsername(),$credentials->getPassword()), new Helpers(),[],"");
 $register->getDBConn();
 $register->register();
 ?>
